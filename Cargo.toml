@@ -1,5 +1,5 @@
 [package]
-name = "tiny-keccak"
+name = "tiny-keccak-py"
 version = "0.1.0"
 edition = "2021"
 
@@ -10,3 +10,4 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pyo3 = "0.18.1"
+tiny-keccak = { version = "2.0.2", features = ["keccak"] }

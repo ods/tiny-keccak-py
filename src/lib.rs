@@ -1,14 +1,21 @@
-use pyo3::prelude::*;
+use pyo3::{prelude::*, types::PyBytes};
+use tiny_keccak::{Hasher, Keccak};
 
-/// Formats the sum of two numbers as string.
+/// The Keccak hash functions defined in Keccak SHA3 submission
 #[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
+fn keccak256<'a>(py: Python<'a>, input: &[u8]) -> PyResult<&'a PyBytes> {
+    let mut hasher = Keccak::v256();
+    hasher.update(input);
+    PyBytes::new_with(py, 32, |mut output: &mut [u8]| {
+        hasher.finalize(&mut output);
+        Ok(())
+    })
 }
 
 /// A Python module implemented in Rust.
 #[pymodule]
-fn tiny_keccak(_py: Python, m: &PyModule) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(sum_as_string, m)?)?;
+#[pyo3(name = "tiny_keccak")]
+fn tiny_keccak_py(_py: Python, m: &PyModule) -> PyResult<()> {
+    m.add_function(wrap_pyfunction!(keccak256, m)?)?;
     Ok(())
 }
