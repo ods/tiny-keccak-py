@@ -1,7 +1,7 @@
 use pyo3::{prelude::*, types::PyBytes};
 use tiny_keccak::{Hasher, Keccak};
 
-/// The Keccak hash functions defined in Keccak SHA3 submission
+/// The Keccak-256 hash function defined in Keccak SHA3 submission
 #[pyfunction]
 fn keccak256<'a>(py: Python<'a>, input: &[u8]) -> PyResult<&'a PyBytes> {
     let mut hasher = Keccak::v256();
@@ -12,7 +12,7 @@ fn keccak256<'a>(py: Python<'a>, input: &[u8]) -> PyResult<&'a PyBytes> {
     })
 }
 
-/// A Python module implemented in Rust.
+/// The Keccak-256 hash function defined in Keccak SHA3 submission
 #[pymodule]
 #[pyo3(name = "tiny_keccak")]
 fn tiny_keccak_py(_py: Python, m: &PyModule) -> PyResult<()> {

@@ -4,13 +4,22 @@ build-backend = "maturin"
 
 [project]
 name = "tiny-keccak"
+description = "The Keccak-256 hash function defined in Keccak SHA3 submission"
+readme = "README.md"
+authors = [
+    { name = "Denis Otkidach", email = "denis.otkidach@gmail.com" }
+]
+license = { text = "MIT" }
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Security :: Cryptography",
 ]
 
+[project.urls]
+Source = "https://github.com/ods/tiny-keccak-py"
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
