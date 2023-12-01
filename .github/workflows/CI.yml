@@ -23,6 +23,7 @@ jobs:
     strategy:
       matrix:
         target: [x86_64, aarch64]
+        python: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -32,7 +33,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist --find-interpreter
+          args: -i ${{ matrix.python }} --release --out dist
           sccache: 'true'
           manylinux: auto
       - name: Upload wheels
@@ -46,6 +47,7 @@ jobs:
     strategy:
       matrix:
         target: [x64]
+        python: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -56,7 +58,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist --find-interpreter
+          args: -i ${{ matrix.python }} --release --out dist
           sccache: 'true'
       - name: Upload wheels
         uses: actions/upload-artifact@v3
@@ -68,7 +70,8 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        target: [x86_64, aarch64]
+        target: ["x86_64", "aarch64"]
+        python: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -78,7 +81,7 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --out dist --find-interpreter
+          args: -i ${{ matrix.python }} --release --out dist
           sccache: 'true'
       - name: Upload wheels
         uses: actions/upload-artifact@v3
