@@ -9,5 +9,5 @@ name = "tiny_keccak"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = "0.22.2"
+pyo3 = { version = "0.22.2", features = ["extension-module"] }
 tiny-keccak = { version = "2.0.2", features = ["keccak"] }

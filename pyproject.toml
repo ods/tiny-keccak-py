@@ -20,6 +20,3 @@ classifiers = [
 
 [project.urls]
 Source = "https://github.com/ods/tiny-keccak-py"
-
-[tool.maturin]
-features = ["pyo3/extension-module"]
